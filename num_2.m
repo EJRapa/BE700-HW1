@@ -10,7 +10,7 @@ bad_table = table2array(HW1_dat(strcmp(HW1_dat.prognosis,'POOR'),1:30));
 [NLL,p_val,CI,stats] = ttest2(good_table,bad_table);
 
 p_log = -log10(p_val);
-z_score = norminv(p_val/2);   % Assuming one-tailed
+z_score = norminv(p_val/2);   % Assuming two-tailed
 
 [p_val,idx] = sort(p_val);
 
@@ -107,5 +107,8 @@ hold on
 scatter(x(round(index/size(kNN_correct,2))),high_val,'r',"filled");
 
 legend(["5-fold","10-fold","15-fold","20-fold","25-fold","30-fold","Max Correct Classification"]);
+title("WEKA k-NN Classification Accuracy");
+xlabel("k Nearest Points");
+ylabel("% Classification Success");
 
 saveas(gcf,"wekaplot.png");
