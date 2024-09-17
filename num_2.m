@@ -60,5 +60,25 @@ er_bad.LineStyle = 'none';
 legend(["Good Prognosis","","Poor Prognosis"]);
 
 title("Average Microarray Expression At Specific Gene Based on Prognosis");
+xlabel("Gene");
+ylabel("Gene Expression Level");
 
 saveas(gcf,"RawDat.png");
+
+% Plot p-values 
+
+figure
+bar(rowName,p_val);
+
+hold on
+
+yline(0.05,"--");
+ylim([0 0.055])
+
+legend(["P-value","Failure to Reject Null Hypothesis"]);
+
+title("Visualization of p-values for Each Gene");
+ylabel("Probability of Observing Test Statistic or More Extreme");
+xlabel("Gene");
+
+saveas(gcf,"pvals.png");
