@@ -82,3 +82,30 @@ ylabel("Probability of Observing Test Statistic or More Extreme");
 xlabel("Gene");
 
 saveas(gcf,"pvals.png");
+
+%% kNN Test Success
+
+% rows are number of folds, cols are k (1,3,5,10,20)
+kNN_correct = [
+    87.36, 86.21, 85.06, 90.80, 87.36 ;  % 5-fold
+    87.36, 88.51, 83.91, 87.36, 88.51 ;  % 10-fold
+    0    , 0    , 0    , 0    , 90.80 ;  % 15-fold
+    0    , 0    , 0    , 0    , 88.51 ;  % 20-fold
+    0    , 0    , 0    , 0    , 89.66 ;  % 25-fold
+    0    , 0    , 0    , 0    , 89.66 ;  % 30-fold
+];
+
+x = [1,3,5,10,20];
+
+figure
+bar(x,kNN_correct);
+ylim([80 91]);
+
+hold on
+
+[high_val,index] = max(kNN_correct,[],"all");
+scatter(x(round(index/size(kNN_correct,2))),high_val,'r',"filled");
+
+legend(["5-fold","10-fold","15-fold","20-fold","25-fold","30-fold","Max Correct Classification"]);
+
+saveas(gcf,"wekaplot.png");
